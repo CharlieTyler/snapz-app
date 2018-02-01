@@ -111,6 +111,7 @@ RSpec.describe GramsController, type: :controller do
   end
 
   describe "grams#show action" do
+
     it "should successfully show the page if the gram is found" do
       gram = FactoryBot.create(:gram)
       get :show, params: { id: gram.id }
@@ -131,6 +132,7 @@ RSpec.describe GramsController, type: :controller do
   end
 
   describe "grams#new action" do
+
     it "should require users to be logged in" do
       get :new
       expect(response).to redirect_to new_user_session_path
@@ -156,7 +158,13 @@ RSpec.describe GramsController, type: :controller do
       user = FactoryBot.create(:user)
       sign_in user
 
-      post :create, params: { gram: { message: 'Hello!' } }
+      post :create, params: {
+        gram: {
+          message: 'Hello!',
+          picture: fixture_file_upload("/picture.png", 'image/png')
+        }
+      }
+
       expect(response).to redirect_to root_path
 
       gram = Gram.last
