@@ -7,6 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type => 'image/png' %>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,100,300,600,700' rel='stylesheet' type='text/css'>
   </head>
@@ -14,9 +15,10 @@
   <body>
     <nav class="navbar">
       <div class="col-10 offset-1 col-sm-8 offset-md-2 col-md-6 offset-md-3">
-        <div class="navbar-brand float-left">
+        <%= link_to root_path, class: 'navbar-brand float-left' do %>
+          <%= image_tag 'snapz.png', height: '40', width: '40', class: 'd-inline-block align-top', alt: 'Snapz Logo' %>
           Snapz
-        </div>
+        <% end %>
         <div class="add float-right">
           <% if current_user %>
             You're signed in as <%= current_user.email %>.
@@ -29,7 +31,8 @@
         </div>
       </div>
       <br class="clear-fix" />
-
+    </nav>
+    <div class="col-10 offset-1 col-sm-8 offset-md-2 col-md-6 offset-md-3">
       <% if notice.present? %>
         <p class="notice"><%= notice %></p>
       <% end %>
@@ -37,22 +40,18 @@
       <% if alert.present? %>
         <p class="alert"><%= alert %></p>
       <% end %>
-    </nav>
-
-
-      
-    
-      
-
-
-
+    </div>
 
     <%= yield %>
 
+  </div>
 
   </body>
 
-  <footer>
-    
+  <footer id="footer">
+    <div class="container text-center">
+      <%= link_to 'About Snapz', root_path %>
+      <br />
+    </div>
   </footer>
 </html>
