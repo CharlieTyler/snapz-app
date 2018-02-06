@@ -1,6 +1,6 @@
 class GramsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-
+  
   def update
     @gram = Gram.find_by_id(params[:id])
     return render_not_found if @gram.blank?
@@ -34,7 +34,7 @@ class GramsController < ApplicationController
   end
 
   def index
-    @grams = Gram.all
+    @grams = Gram.all.sort_by { |m| m.created_at }.reverse!
   end
 
   def new
